@@ -1,0 +1,106 @@
+\hypertarget{clientheader_8h}{}\section{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/clientheader.h File Reference}
+\label{clientheader_8h}\index{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/clientheader.\+h@{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/clientheader.\+h}}
+
+
+Provides utility functions for the client.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for clientheader.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{clientheader_8h_a3aea621dfd9ba7e52d6ab6930b149ded}{findpath} (char $\ast$reqpath)
+\begin{DoxyCompactList}\small\item\em This function finds the cutoff point between url and path. \end{DoxyCompactList}\item 
+int \hyperlink{clientheader_8h_abd7ad1c5c5f6ba3c6a7287518c533752}{getclientsocket} (char $\ast$hostname, char $\ast$portnr, char $\ast$\hyperlink{client_8c_aad73ccafdb96b6eda42fd71c56cb2d33}{pgm\+\_\+name})
+\begin{DoxyCompactList}\small\item\em This function returns a client socket. \end{DoxyCompactList}\item 
+int \hyperlink{clientheader_8h_a66e314ca3c1116024fcdc33144d12ca8}{checkresponse} (F\+I\+LE $\ast$sockfile, char $\ast$\hyperlink{client_8c_aad73ccafdb96b6eda42fd71c56cb2d33}{pgm\+\_\+name})
+\begin{DoxyCompactList}\small\item\em This function checks if the response header is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides utility functions for the client. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Schloms \href{mailto:e11701253@student.tuwien.ac.at}{\tt e11701253@student.\+tuwien.\+ac.\+at} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+08.\+11.\+18 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{clientheader_8h_a66e314ca3c1116024fcdc33144d12ca8}\label{clientheader_8h_a66e314ca3c1116024fcdc33144d12ca8}} 
+\index{clientheader.\+h@{clientheader.\+h}!checkresponse@{checkresponse}}
+\index{checkresponse@{checkresponse}!clientheader.\+h@{clientheader.\+h}}
+\subsubsection{\texorpdfstring{checkresponse()}{checkresponse()}}
+{\footnotesize\ttfamily int checkresponse (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{sockfile,  }\item[{char $\ast$}]{pgm\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+This function checks if the response header is valid. 
+
+This function takes the first line of the response header and checks if it starts with \char`\"{}\+H\+T\+T\+P/1.\+1\char`\"{} and what code was received.
+
+This function checks if the response header is valid.
+
+Function \hyperlink{clientheader_8h_a66e314ca3c1116024fcdc33144d12ca8}{checkresponse()}
+
+This function checks the first line of the response header and determines if it\textquotesingle{}s a valid response. Then it looks for the first empty line which marks the beginning of the requested file. 
+\begin{DoxyParams}{Parameters}
+{\em sockfile} & File in which request is written and from which response is read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, otherwise -\/1. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientheader_8h_a3aea621dfd9ba7e52d6ab6930b149ded}\label{clientheader_8h_a3aea621dfd9ba7e52d6ab6930b149ded}} 
+\index{clientheader.\+h@{clientheader.\+h}!findpath@{findpath}}
+\index{findpath@{findpath}!clientheader.\+h@{clientheader.\+h}}
+\subsubsection{\texorpdfstring{findpath()}{findpath()}}
+{\footnotesize\ttfamily int findpath (\begin{DoxyParamCaption}\item[{char $\ast$}]{reqfile }\end{DoxyParamCaption})}
+
+
+
+This function finds the cutoff point between url and path. 
+
+This function checks every char of the url string and marks the position of the start of the path.
+
+This function finds the cutoff point between url and path.
+
+Function \hyperlink{clientheader_8h_a3aea621dfd9ba7e52d6ab6930b149ded}{findpath()}
+
+This function checks the url (without the \href{http://}{\tt http\+://} part) and checks every character. If it\textquotesingle{}s one of the defined characters, the hostname ends and the path begins. 
+\begin{DoxyParams}{Parameters}
+{\em char} & reqfile The file requested by the client. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns the cutoff point between hostname and path 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientheader_8h_abd7ad1c5c5f6ba3c6a7287518c533752}\label{clientheader_8h_abd7ad1c5c5f6ba3c6a7287518c533752}} 
+\index{clientheader.\+h@{clientheader.\+h}!getclientsocket@{getclientsocket}}
+\index{getclientsocket@{getclientsocket}!clientheader.\+h@{clientheader.\+h}}
+\subsubsection{\texorpdfstring{getclientsocket()}{getclientsocket()}}
+{\footnotesize\ttfamily int getclientsocket (\begin{DoxyParamCaption}\item[{char $\ast$}]{hostname,  }\item[{char $\ast$}]{portnr,  }\item[{char $\ast$}]{pgm\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+This function returns a client socket. 
+
+This function calls getaddrinfo() and uses the information provided to create a socket.
+
+This function returns a client socket.
+
+Function \hyperlink{clientheader_8h_abd7ad1c5c5f6ba3c6a7287518c533752}{getclientsocket()}
+
+This function creates a socket, connects to a host and checks return values after each action. 
+\begin{DoxyParams}{Parameters}
+{\em hostname} & Host. \\
+\hline
+{\em portnr} & Port number. \\
+\hline
+\end{DoxyParams}

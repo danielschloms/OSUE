@@ -1,0 +1,92 @@
+\hypertarget{client_8c}{}\section{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/client.c File Reference}
+\label{client_8c}\index{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/client.\+c@{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/client.\+c}}
+
+
+H\+T\+TP Client.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$getopt.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}clientheader.\+h\char`\"{}}\newline
+Include dependency graph for client.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{client_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}{usage} (void)
+\begin{DoxyCompactList}\small\item\em This function writes helpful usage information about the program to stderr. \end{DoxyCompactList}\item 
+int \hyperlink{client_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em After checking options and arguments this function connects to a host and requests a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static char $\ast$ \hyperlink{client_8c_aad73ccafdb96b6eda42fd71c56cb2d33}{pgm\+\_\+name}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+H\+T\+TP Client. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Elias Schloms \href{mailto:e11701253@student.tuwien.ac.at}{\tt e11701253@student.\+tuwien.\+ac.\+at} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06.\+11.\+18
+\end{DoxyDate}
+This program request a file via http and writes the file to stdout or a specified file. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{client_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{client_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{client.\+c@{client.\+c}!main@{main}}
+\index{main@{main}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+After checking options and arguments this function connects to a host and requests a file. 
+
+Program entry point.
+
+The function first checks for options and arguments. If -\/p is used, a port can be specified (standard = 80). -\/o is used to write the content to a specific file and -\/d is used to write the content into a file in a specific directory. After parsing all arguments getaddrinfo() is called, a socket is created and a connection is established. This client then reads the requested file and prints its content to stdout or a specific file. global variables\+: pgm\+\_\+name 
+\begin{DoxyParams}{Parameters}
+{\em argc} & The argument counter. \\
+\hline
+{\em argv} & The argument vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}\label{client_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}} 
+\index{client.\+c@{client.\+c}!usage@{usage}}
+\index{usage@{usage}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily static void usage (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function writes helpful usage information about the program to stderr. 
+
+Usage function.
+
+global variables\+: pgm\+\_\+name 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{client_8c_aad73ccafdb96b6eda42fd71c56cb2d33}\label{client_8c_aad73ccafdb96b6eda42fd71c56cb2d33}} 
+\index{client.\+c@{client.\+c}!pgm\+\_\+name@{pgm\+\_\+name}}
+\index{pgm\+\_\+name@{pgm\+\_\+name}!client.\+c@{client.\+c}}
+\subsubsection{\texorpdfstring{pgm\+\_\+name}{pgm\_name}}
+{\footnotesize\ttfamily char$\ast$ pgm\+\_\+name\hspace{0.3cm}{\ttfamily [static]}}
+
+Program name 

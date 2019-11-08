@@ -1,0 +1,73 @@
+\hypertarget{serverheader_8h}{}\section{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/serverheader.h File Reference}
+\label{serverheader_8h}\index{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/serverheader.\+h@{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/serverheader.\+h}}
+
+
+Provides utility functions for the server.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{serverheader_8h_a848750161824c5aa011ed0442ec0863c}\label{serverheader_8h_a848750161824c5aa011ed0442ec0863c}} 
+\#define {\bfseries L\+I\+S\+T\+E\+N\+\_\+\+B\+A\+C\+K\+L\+OG}~5
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{serverheader_8h_ae9fb24ec550c760d4b064c084d67919a}{getserversocket} (char $\ast$portnr)
+\begin{DoxyCompactList}\small\item\em This function returns a passive server socket. \end{DoxyCompactList}\item 
+int \hyperlink{serverheader_8h_a03cd5d6cc6abfffc0a3f3d92bc700585}{checkrequest} (char $\ast$method, char $\ast$http, int clfd)
+\begin{DoxyCompactList}\small\item\em This function checks if the request is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides utility functions for the server. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Schloms \href{mailto:e11701253@student.tuwien.ac.at}{\tt e11701253@student.\+tuwien.\+ac.\+at} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+08.\+11.\+18 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{serverheader_8h_a03cd5d6cc6abfffc0a3f3d92bc700585}\label{serverheader_8h_a03cd5d6cc6abfffc0a3f3d92bc700585}} 
+\index{serverheader.\+h@{serverheader.\+h}!checkrequest@{checkrequest}}
+\index{checkrequest@{checkrequest}!serverheader.\+h@{serverheader.\+h}}
+\subsubsection{\texorpdfstring{checkrequest()}{checkrequest()}}
+{\footnotesize\ttfamily int checkrequest (\begin{DoxyParamCaption}\item[{char $\ast$}]{method,  }\item[{char $\ast$}]{http,  }\item[{int}]{clfd }\end{DoxyParamCaption})}
+
+
+
+This function checks if the request is valid. 
+
+This function takes the request and checks if method = \char`\"{}\+G\+E\+T\char`\"{} and if it ends with \char`\"{}\+H\+T\+T\+P/1.\+1\char`\"{}.
+
+Function \hyperlink{serverheader_8h_a03cd5d6cc6abfffc0a3f3d92bc700585}{checkrequest()}
+
+This function checks if the request starts with the method \char`\"{}\+G\+E\+T\char`\"{} and ends with \char`\"{}\+H\+T\+T\+P/1.\+1\char`\"{}. 
+\begin{DoxyParams}{Parameters}
+{\em method} & String which should be \char`\"{}\+G\+E\+T\char`\"{}. \\
+\hline
+{\em http} & String which should be \char`\"{}\+H\+T\+T\+P/1.\+1\char`\"{}. \\
+\hline
+{\em clfd} & File descriptor of connected socket. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns 0 if successful, otherwise -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{serverheader_8h_ae9fb24ec550c760d4b064c084d67919a}\label{serverheader_8h_ae9fb24ec550c760d4b064c084d67919a}} 
+\index{serverheader.\+h@{serverheader.\+h}!getserversocket@{getserversocket}}
+\index{getserversocket@{getserversocket}!serverheader.\+h@{serverheader.\+h}}
+\subsubsection{\texorpdfstring{getserversocket()}{getserversocket()}}
+{\footnotesize\ttfamily int getserversocket (\begin{DoxyParamCaption}\item[{char $\ast$}]{portnr }\end{DoxyParamCaption})}
+
+
+
+This function returns a passive server socket. 
+
+This function calls getaddrinfo() and uses the information provided to create a socket, after which it\textquotesingle{}s bound to a port and set as passive. 

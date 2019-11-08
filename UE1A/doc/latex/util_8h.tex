@@ -1,0 +1,67 @@
+\hypertarget{util_8h}{}\section{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+A/src/util.h File Reference}
+\label{util_8h}\index{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+A/src/util.\+h@{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+A/src/util.\+h}}
+
+
+Contains a function used by mydiff.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{util_8h_ac8b36dac2d97124040860c2b892d8ec0}{compare\+Line} (char line1\mbox{[}$\,$\mbox{]}, char line2\mbox{[}$\,$\mbox{]}, int line\+Count, int mode\+\_\+i, char $\ast$output, int buffer)
+\begin{DoxyCompactList}\small\item\em This function compares 2 lines passed on by the main function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains a function used by mydiff. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Schloms \href{mailto:e11701253@student.tuwien.ac.at}{\tt e11701253@student.\+tuwien.\+ac.\+at} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+08.\+11.\+18 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{util_8h_ac8b36dac2d97124040860c2b892d8ec0}\label{util_8h_ac8b36dac2d97124040860c2b892d8ec0}} 
+\index{util.\+h@{util.\+h}!compare\+Line@{compare\+Line}}
+\index{compare\+Line@{compare\+Line}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{compare\+Line()}{compareLine()}}
+{\footnotesize\ttfamily void compare\+Line (\begin{DoxyParamCaption}\item[{char}]{line1\mbox{[}$\,$\mbox{]},  }\item[{char}]{line2\mbox{[}$\,$\mbox{]},  }\item[{int}]{line\+Count,  }\item[{int}]{mode\+\_\+i,  }\item[{char $\ast$}]{output,  }\item[{int}]{buffer }\end{DoxyParamCaption})}
+
+
+
+This function compares 2 lines passed on by the main function. 
+
+This function takes 2 lines, compares them char by char and counts the amount of mismatches. If mode\+\_\+i is $>$ 0 (option -\/i is used) then each letter is changed to it\textquotesingle{}s lowercase variant.
+
+Function compareline()
+
+This function takes 2 lines, compares them char by char and counts the amount of mismatches. If mode\+\_\+i is $>$ 0 (option -\/i is used) then each letter is changed to it\textquotesingle{}s lowercase variant. 
+\begin{DoxyParams}{Parameters}
+{\em line1} & Line of first file. \\
+\hline
+{\em line2} & Line of second file. \\
+\hline
+{\em line\+Count} & How many lines have been read. \\
+\hline
+{\em mode\+\_\+i} & Indicates if option -\/i was used. \\
+\hline
+{\em $\ast$output} & The string where the output is stored. \\
+\hline
+{\em buffer} & Size of output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns nothing (void) 
+\end{DoxyReturn}
+$<$ Length of the longer line
+
+Compares the length of both lines
+
+Compares the ith character of every line
+
+If there are no differences, nothing is printed

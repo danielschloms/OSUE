@@ -1,0 +1,248 @@
+\hypertarget{generator_8c}{}\section{src/generator.c File Reference}
+\label{generator_8c}\index{src/generator.\+c@{src/generator.\+c}}
+
+
+Generator program module.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$semaphore.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}shm.\+h\char`\"{}}\newline
+Include dependency graph for generator.\+c\+:
+% FIG 0
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{generator_8c_a0fdb7b933ef091574ff57d1f36dd4167}{M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES}~3
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{generator_8c_a0c924bf1febf2ed02cc426268b56b74e}{setup\+\_\+shm} (void)
+\begin{DoxyCompactList}\small\item\em This function opens the shared memory and semaphores. \end{DoxyCompactList}\item 
+static int \hyperlink{generator_8c_adee1b435d80f8673a366b470616bf75f}{parse\+Edge} (int pos, char $\ast$\hyperlink{structedge}{edge}, int $\ast$$\ast$edgelist)
+\begin{DoxyCompactList}\small\item\em This function parses an edge string into 2 ints and writes them to edgelist. \end{DoxyCompactList}\item 
+static void \hyperlink{generator_8c_a9386ea72a3b83ffe794e3f96debc02c6}{rand\+Colour} (int msize, int $\ast$clist)
+\begin{DoxyCompactList}\small\item\em This function \char`\"{}colours\char`\"{} each vertex randomly. \end{DoxyCompactList}\item 
+static int \hyperlink{generator_8c_affee4f097592aa31ff5c884b62e55689}{delete\+Edges} (int msize, int $\ast$clist, int $\ast$$\ast$matrix)
+\begin{DoxyCompactList}\small\item\em This function \char`\"{}deletes\char`\"{} edges between vertices of the same colour. \end{DoxyCompactList}\item 
+static void \hyperlink{generator_8c_afac7bf275296a874cd78ee8810e2d80d}{circ\+\_\+buf\+\_\+write} (struct \hyperlink{structedge}{edge} sol)
+\begin{DoxyCompactList}\small\item\em This function writes an edge to the circular buffer. \end{DoxyCompactList}\item 
+static void \hyperlink{generator_8c_a5c6551bf9ea9cf51ae7f2076c4cbe8ef}{cleanup} (void)
+\begin{DoxyCompactList}\small\item\em This function cleans up resources. \end{DoxyCompactList}\item 
+static void \hyperlink{generator_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}{usage} (void)
+\begin{DoxyCompactList}\small\item\em This function writes helpful usage information about the program to stderr. \end{DoxyCompactList}\item 
+int \hyperlink{generator_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em This function repeatedly generates random colourings for a given graph and writes the result to a circular buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static char $\ast$ \hyperlink{generator_8c_aad73ccafdb96b6eda42fd71c56cb2d33}{pgm\+\_\+name}
+\item 
+sem\+\_\+t $\ast$ \hyperlink{generator_8c_a7d6e7e298780336afe03f2b257e3f11c}{free\+\_\+sem}
+\item 
+sem\+\_\+t $\ast$ \hyperlink{generator_8c_a51687de486030b9fac58480e3112f0cc}{used\+\_\+sem}
+\item 
+sem\+\_\+t $\ast$ \hyperlink{generator_8c_a9b044b36aa51f6b7a4c9fc725e0a274e}{mutex}
+\item 
+struct \hyperlink{structshm}{shm} $\ast$ \hyperlink{generator_8c_aa09ac89a5ada5690d334f73da8ce2258}{myshm}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Generator program module. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Schloms \href{mailto:e11701253@student.tuwien.ac.at}{\tt e11701253@student.\+tuwien.\+ac.\+at} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+12.\+01.\+19
+\end{DoxyDate}
+This program generates random solutions to the 3-\/colour problem. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{generator_8c_a0fdb7b933ef091574ff57d1f36dd4167}\label{generator_8c_a0fdb7b933ef091574ff57d1f36dd4167}} 
+\index{generator.\+c@{generator.\+c}!M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES@{M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES}}
+\index{M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES@{M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES}{MAX\_VERTICES}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+V\+E\+R\+T\+I\+C\+ES~3}
+
+Maximal length of a vertex index (-\/$>$ Max. 1000 vertices) 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{generator_8c_afac7bf275296a874cd78ee8810e2d80d}\label{generator_8c_afac7bf275296a874cd78ee8810e2d80d}} 
+\index{generator.\+c@{generator.\+c}!circ\+\_\+buf\+\_\+write@{circ\+\_\+buf\+\_\+write}}
+\index{circ\+\_\+buf\+\_\+write@{circ\+\_\+buf\+\_\+write}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{circ\+\_\+buf\+\_\+write()}{circ\_buf\_write()}}
+{\footnotesize\ttfamily static void circ\+\_\+buf\+\_\+write (\begin{DoxyParamCaption}\item[{struct \hyperlink{structedge}{edge}}]{sol }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function writes an edge to the circular buffer. 
+
+Writing function
+
+
+\begin{DoxyParams}{Parameters}
+{\em sol} & struct that contains 2 vertices and represents an edge. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{generator_8c_a5c6551bf9ea9cf51ae7f2076c4cbe8ef}\label{generator_8c_a5c6551bf9ea9cf51ae7f2076c4cbe8ef}} 
+\index{generator.\+c@{generator.\+c}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily static void cleanup (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function cleans up resources. 
+
+Cleanup function \mbox{\Hypertarget{generator_8c_affee4f097592aa31ff5c884b62e55689}\label{generator_8c_affee4f097592aa31ff5c884b62e55689}} 
+\index{generator.\+c@{generator.\+c}!delete\+Edges@{delete\+Edges}}
+\index{delete\+Edges@{delete\+Edges}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{delete\+Edges()}{deleteEdges()}}
+{\footnotesize\ttfamily static int delete\+Edges (\begin{DoxyParamCaption}\item[{int}]{msize,  }\item[{int $\ast$}]{clist,  }\item[{int $\ast$$\ast$}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function \char`\"{}deletes\char`\"{} edges between vertices of the same colour. 
+
+Function to delete edges
+
+
+\begin{DoxyParams}{Parameters}
+{\em msize} & Number of vertices. \\
+\hline
+{\em clist} & Array which stores a colour for each vertex. \\
+\hline
+{\em matrix} & Adjacency matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{generator_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{generator_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{generator.\+c@{generator.\+c}!main@{main}}
+\index{main@{main}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+This function repeatedly generates random colourings for a given graph and writes the result to a circular buffer. 
+
+Program entry point.
+
+global variables\+: pgm\+\_\+name, free\+\_\+sem, used\+\_\+sem, mutex, myshm 
+\begin{DoxyParams}{Parameters}
+{\em argc} & The argument counter. \\
+\hline
+{\em argv} & The argument vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS on successful termination, otherwise E\+X\+I\+T\+\_\+\+F\+A\+I\+L\+U\+RE. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{generator_8c_adee1b435d80f8673a366b470616bf75f}\label{generator_8c_adee1b435d80f8673a366b470616bf75f}} 
+\index{generator.\+c@{generator.\+c}!parse\+Edge@{parse\+Edge}}
+\index{parse\+Edge@{parse\+Edge}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{parse\+Edge()}{parseEdge()}}
+{\footnotesize\ttfamily static int parse\+Edge (\begin{DoxyParamCaption}\item[{int}]{pos,  }\item[{char $\ast$}]{edge,  }\item[{int $\ast$$\ast$}]{edgelist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function parses an edge string into 2 ints and writes them to edgelist. 
+
+Parsing function
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Index in edgelist. \\
+\hline
+{\em edge} & The edge string. \\
+\hline
+{\em edgelist} & The edges are stored in edgelist. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns -\/1 if edge couldn\textquotesingle{}t be parsed correctly, otherwise 1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{generator_8c_a9386ea72a3b83ffe794e3f96debc02c6}\label{generator_8c_a9386ea72a3b83ffe794e3f96debc02c6}} 
+\index{generator.\+c@{generator.\+c}!rand\+Colour@{rand\+Colour}}
+\index{rand\+Colour@{rand\+Colour}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{rand\+Colour()}{randColour()}}
+{\footnotesize\ttfamily static void rand\+Colour (\begin{DoxyParamCaption}\item[{int}]{msize,  }\item[{int $\ast$}]{clist }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function \char`\"{}colours\char`\"{} each vertex randomly. 
+
+Colouring function
+
+
+\begin{DoxyParams}{Parameters}
+{\em msize} & Number of vertices. \\
+\hline
+{\em clist} & Array which stores a colour for each vertex. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{generator_8c_a0c924bf1febf2ed02cc426268b56b74e}\label{generator_8c_a0c924bf1febf2ed02cc426268b56b74e}} 
+\index{generator.\+c@{generator.\+c}!setup\+\_\+shm@{setup\+\_\+shm}}
+\index{setup\+\_\+shm@{setup\+\_\+shm}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{setup\+\_\+shm()}{setup\_shm()}}
+{\footnotesize\ttfamily static void setup\+\_\+shm (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function opens the shared memory and semaphores. 
+
+S\+H\+M-\/\+Setup funciton \mbox{\Hypertarget{generator_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}\label{generator_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}} 
+\index{generator.\+c@{generator.\+c}!usage@{usage}}
+\index{usage@{usage}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily static void usage (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function writes helpful usage information about the program to stderr. 
+
+Usage function.
+
+global variables\+: pgm\+\_\+name 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{generator_8c_a7d6e7e298780336afe03f2b257e3f11c}\label{generator_8c_a7d6e7e298780336afe03f2b257e3f11c}} 
+\index{generator.\+c@{generator.\+c}!free\+\_\+sem@{free\+\_\+sem}}
+\index{free\+\_\+sem@{free\+\_\+sem}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{free\+\_\+sem}{free\_sem}}
+{\footnotesize\ttfamily sem\+\_\+t$\ast$ free\+\_\+sem}
+
+Tracks free space in the circular buffer \mbox{\Hypertarget{generator_8c_a9b044b36aa51f6b7a4c9fc725e0a274e}\label{generator_8c_a9b044b36aa51f6b7a4c9fc725e0a274e}} 
+\index{generator.\+c@{generator.\+c}!mutex@{mutex}}
+\index{mutex@{mutex}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{mutex}{mutex}}
+{\footnotesize\ttfamily sem\+\_\+t$\ast$ mutex}
+
+Ensures that only one generator at a time has write access \mbox{\Hypertarget{generator_8c_aa09ac89a5ada5690d334f73da8ce2258}\label{generator_8c_aa09ac89a5ada5690d334f73da8ce2258}} 
+\index{generator.\+c@{generator.\+c}!myshm@{myshm}}
+\index{myshm@{myshm}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{myshm}{myshm}}
+{\footnotesize\ttfamily struct \hyperlink{structshm}{shm}$\ast$ myshm}
+
+Shared memory \mbox{\Hypertarget{generator_8c_aad73ccafdb96b6eda42fd71c56cb2d33}\label{generator_8c_aad73ccafdb96b6eda42fd71c56cb2d33}} 
+\index{generator.\+c@{generator.\+c}!pgm\+\_\+name@{pgm\+\_\+name}}
+\index{pgm\+\_\+name@{pgm\+\_\+name}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{pgm\+\_\+name}{pgm\_name}}
+{\footnotesize\ttfamily char$\ast$ pgm\+\_\+name\hspace{0.3cm}{\ttfamily [static]}}
+
+Program name \mbox{\Hypertarget{generator_8c_a51687de486030b9fac58480e3112f0cc}\label{generator_8c_a51687de486030b9fac58480e3112f0cc}} 
+\index{generator.\+c@{generator.\+c}!used\+\_\+sem@{used\+\_\+sem}}
+\index{used\+\_\+sem@{used\+\_\+sem}!generator.\+c@{generator.\+c}}
+\subsubsection{\texorpdfstring{used\+\_\+sem}{used\_sem}}
+{\footnotesize\ttfamily sem\+\_\+t$\ast$ used\+\_\+sem}
+
+Tracks used space in the circular buffer 

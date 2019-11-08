@@ -1,0 +1,105 @@
+\hypertarget{server_8c}{}\section{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/server.c File Reference}
+\label{server_8c}\index{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/server.\+c@{/home/daniel/\+Documents/\+Uni\+\_\+\+T\+Inf/2018\+\_\+\+W\+S/\+Betriebssysteme/\+U\+E/\+U\+E1\+B/\+U\+E1\+B\+\_\+\+Abgabe (1)/src/server.\+c}}
+
+
+H\+T\+TP Server.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$getopt.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}serverheader.\+h\char`\"{}}\newline
+Include dependency graph for server.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{server_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}{usage} (void)
+\begin{DoxyCompactList}\small\item\em This function writes helpful usage information about the program to stderr. \end{DoxyCompactList}\item 
+static void \hyperlink{server_8c_a366471b5822de7615f33cbe5eab9726a}{sig\+\_\+handler} (int signo)
+\begin{DoxyCompactList}\small\item\em This function sets term = 1 if a signal is received. \end{DoxyCompactList}\item 
+int \hyperlink{server_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em After checking options and arguments this function creates a server socket, listens for connections and transmits a requested file to a client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8c_aad73ccafdb96b6eda42fd71c56cb2d33}\label{server_8c_aad73ccafdb96b6eda42fd71c56cb2d33}} 
+static char $\ast$ {\bfseries pgm\+\_\+name}
+\item 
+\mbox{\Hypertarget{server_8c_a5f0d446cafa80a20d3705d7536e55371}\label{server_8c_a5f0d446cafa80a20d3705d7536e55371}} 
+static int {\bfseries term} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+H\+T\+TP Server. 
+
+\begin{DoxyAuthor}{Author}
+Daniel Elias Schloms \href{mailto:e11701253@student.tuwien.ac.at}{\tt e11701253@student.\+tuwien.\+ac.\+at} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06.\+11.\+18
+\end{DoxyDate}
+This program waits for connections from clients and transmits requested files 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{server_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{server_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{server.\+c@{server.\+c}!main@{main}}
+\index{main@{main}!server.\+c@{server.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+After checking options and arguments this function creates a server socket, listens for connections and transmits a requested file to a client. 
+
+Program entry point.
+
+The function first checks for options and arguments.\+If -\/p is used, a port can be specified, the default is 8080. If -\/i is used, an index file can be specified, the default is \char`\"{}index.\+html\char`\"{}. Then it creates a socket and listens for connections. After a connection is established, the request from the client is read and checked and the reqested file is transmitted. Then the connection is closed and the server listens for connections again. global variables\+: pgm\+\_\+name 
+\begin{DoxyParams}{Parameters}
+{\em argc} & The argument counter. \\
+\hline
+{\em argv} & The argument vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns E\+X\+I\+T\+\_\+\+S\+U\+C\+C\+E\+SS. 
+\end{DoxyReturn}
+Get positions of spaces
+
+Check if first line contains 3 strings seperated by space\mbox{\Hypertarget{server_8c_a366471b5822de7615f33cbe5eab9726a}\label{server_8c_a366471b5822de7615f33cbe5eab9726a}} 
+\index{server.\+c@{server.\+c}!sig\+\_\+handler@{sig\+\_\+handler}}
+\index{sig\+\_\+handler@{sig\+\_\+handler}!server.\+c@{server.\+c}}
+\subsubsection{\texorpdfstring{sig\+\_\+handler()}{sig\_handler()}}
+{\footnotesize\ttfamily static void sig\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{signo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function sets term = 1 if a signal is received. 
+
+Signal handler function.
+
+global variables\+: term \mbox{\Hypertarget{server_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}\label{server_8c_ad96d407a911fbb914fa8e4cfbf2faf0f}} 
+\index{server.\+c@{server.\+c}!usage@{usage}}
+\index{usage@{usage}!server.\+c@{server.\+c}}
+\subsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily static void usage (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+This function writes helpful usage information about the program to stderr. 
+
+Usage function.
+
+global variables\+: pgm\+\_\+name, term 
